@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>22200615 임규민 리스트</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f0f0;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #222222eb;
+    }
+
+    .main {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .main input[type="text"] {
+      padding: 5px;
+      width: 200px;
+    }
+
+    #add, #remove {
+      padding: 5px 10px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    #add {
+      background-color: #007bff;
+    }
+
+    #remove {
+      background-color: #3c763d;
+    }
+
+    #adding li {
+      list-style: square;
+      padding: 5px;
+      margin: 4px 0;
+      border-radius: 5px;
+    }
+  </style>
+
+  <script>
+    
+    function getID(id) {
+      return document.getElementById(id);
+    }
+
+    function additem() {
+      let s = getID("textbox").value.trim();
+      if (s === "") {
+        alert("값을 입력해주세요!");
+        return;
+      }
+
+      let arr = s.split(",");
+
+      for (let i = 0; i < arr.length; i++) {
+        let item = arr[i].trim();
+        if (item === "") continue;
+
+        let li = document.createElement("li");
+        li.setAttribute("id", item);
+
+        let node = document.createTextNode(item);
+        li.appendChild(node);
+
+        getID("adding").appendChild(li);
+      }
+
+      getID("textbox").value = "";
+    }
+
+    function removeitem() {
+      const ul = getID("adding");
+      const items = ul.getElementsByTagName("li");
+
+      for (let i = items.length - 1; i >= 0; i--) {
+        items[i].remove();
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Dynamic Web Page</h1>
+
+  <div class="main">
+    <input type="text" id="textbox"  />
+    <button id="add" type="button" onclick="additem()">추가</button>
+    <button id="remove" type="button" onclick="removeitem()">삭제</button>
+  </div>
+
+  <ul id="adding"></ul>
+</body>
+</html>
