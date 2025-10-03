@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O/X 이동하기</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        /* CSS 선택자 오타 수정 (dlv_panel -> div_panel) */
+        .div_panel {
+            font-size: 300px; /* 가독성을 위해 크기 살짝 줄임 */
+            text-align: center;
+            cursor: pointer; /* 클릭 가능한 요소임을 알려줌 */
+            user-select: none; /* 텍스트가 드래그되지 않도록 설정 */
+        }
+        .div_panel.div_panel_o {
+            background-color: aqua;
+        }
+        .div_panel.div_panel_x {
+            background-color: palevioletred;
+        }
+
+        /* CSS 선택자 오타 수정 (dlv_palyer -> div_player) */
+        .div_player {
+            position: fixed; /* 화면 기준으로 위치 고정 */
+            top: 50%; /* 세로 중앙 정렬을 위해 추가 */
+            height: 50px;
+            width: 50px;
+            background-color: #ffc107;
+            border: 2px solid #333;
+            border-radius: 50%; /* 원 모양으로 만듦 */
+            
+            /* 내부 학번 텍스트를 중앙 정렬 */
+            text-align: center;
+            line-height: 50px; /* 세로 중앙 정렬 */
+            font-size: 14px;
+            font-weight: bold;
+
+            /* 부드러운 이동 효과 추가 */
+            transition: left 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    학번: <input id="input_stdnum" type="text" placeholder="여기에 학번 입력">
+
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 50%;">
+                <div class="div_panel div_panel_o" onclick="listener_panel_clicked('o')">
+                    O
+                </div>
+            </td>
+            <td style="width: 50%;">
+                <div class="div_panel div_panel_x" onclick="listener_panel_clicked('x')">
+                    X
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div id="div_player_me" class="div_player"></div>
+
+    <script>
+        function listener_panel_clicked(obj_way) {
+            // 5. input 상자에서 학번 값을 가져옵니다.
+            let stdnum = $("#input_stdnum").val();
+            if (!stdnum) { // 학번이 비어있으면 경고
+                alert("학번을 먼저 입력해주세요!");
+                return;
+            }
+
+            // 플레이어 div에 학번을 텍스트로 넣습니다.
+            $("#div_player_me").text(stdnum);
+
+            // 6. 'o'와 'x'에 따라 left 속성을 올바르게 설정합니다.
+            if (obj_way === "o") {
+                // 왼쪽 패널(0% ~ 50%)의 중앙은 25%
+                // 플레이어 너비(50px)의 절반(25px)을 빼서 정확히 중앙에 위치시킴
+                $("#div_player_me").css("left", "calc(25% - 25px)");
+            } else {
+                // 오른쪽 패널(50% ~ 100%)의 중앙은 75%
+                $("#div_player_me").css("left", "calc(75% - 25px)");
+            }
+        }
+    </script>
+
+</body>
+</html>

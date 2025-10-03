@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="my.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h4>Add New Word</h4>
+
+    <form name="addForm" onsubmit="return validateForm()">
+
+        <label for="word">Word:</label><br>
+        <input type="text" name="word" id="word"><br><br>
+
+        <label for="meaning">Meaning:</label><br>
+        <input type="text" name="meaning" id="meaning"><br><br>
+
+        <label for="level">Level:</label><br>
+        <select name="level" id="level">
+            <option value="">-- Choose a level --</option>
+            <option value="*">*</option>
+            <option value="**">**</option>
+            <option value="***">***</option>
+        </select><br><br>
+
+        <label for="sentence">Sentence:</label><br>
+        <textarea name="sentence" id="sentence" cols="40" rows="3"></textarea><br><br>
+
+        <input type="submit" value="확인">
+        <button type="button" onclick="location.href='index.html'">취소</button>
+    </form>
+
+    </div>
+
+    <script>
+        function validateForm(){
+            let wordInput=document.addForm.word;
+            let meaningInput=document.addForm.meaning;
+            let levelInput=document.addForm.level;
+            let sentenceInput=document.addForm.sentence;
+
+            if(wordInput.value==""){
+                alert("단어를 입력해주세요.");
+                return false;
+            }
+            if(meaningInput.value==""){
+                alert("의미를 입력해주세요.");
+                return false;
+            }
+            if(levelInput.value==""){
+                alert("레벨을 입력해주세요.");
+                return false;
+            }
+            if(sentenceInput.value==""){
+                alert("예문을 입력해주세요.");
+                return false;
+            }
+
+            alert("게시물이 추가됩니다");
+            window.location.href='index.html';
+            return false;
+
+
+        }
+    </script>
+    
+</body>
+</html>
